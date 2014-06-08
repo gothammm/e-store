@@ -1,0 +1,17 @@
+{
+    "db": {
+        "env": "stage",
+        "local": {
+            "host": "127.0.0.1",
+            "db": "store",
+            "port": "27017"
+        },
+        "stage": {
+            "host":"ds053978.mongolab.com",
+            "db": "storedb",
+            "port":53978,
+            "username": "admin",
+            "password": "admin"
+        }   
+    }
+}

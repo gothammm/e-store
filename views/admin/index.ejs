@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Store - Admin</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="icon" href="/contents/images/favicon.ico"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">E-Store! - Admin</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+              </ul>
+              <div class="navbar-text navbar-right">Signed in as <a href="#" id="username-badge" class="navbar-link dropdown-toggle" data-toggle="dropdown">
+                   <%= admin_username %></a>
+              </div>
+              <div class="pull-right" style="padding: 5px;">
+                <button class="btn btn-success" data-toggle="modal" data-target="#admin-add-product">Add Product</button>
+                <button class="btn btn-primary" onclick="window.location = '/admin/logout';">Logout</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+        
+        
+        <section id="admin-main">
+            <div class="jumbotron" style="background: white;">
+                <div class="panel panel-primary" id="admin-order-listing" style="margin: auto;">
+                    <div class="panel-heading">
+                        <button type="button" onclick="window.location = '/admin?q=shipped';" class="btn <%if(type == 'shipped') {%>active<%}%> btn-success">Shipped</button>
+                        <button type="button" onclick="window.location = '/admin?q=shipping';" class="btn <%if(type == 'shipping') {%>active<%}%> btn-success">Shipping</button>
+                        <button type="button" onclick="window.location = '/admin?q=delivered';" class="btn <%if(type == 'delivered') {%>active<%}%> btn-success">Delivered</button>
+                    </div>
+                    <table id="admin-order-list" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Id</th>
+                                        <th>Product Name</th>
+                                        <th># of Items</th>
+                                        <th>Price</th>
+                                        <th>Order On</th>
+                                        <th>Ordered By</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-order-summary-list">
+                                    <%for(var i = 0; i < orderList.length; i++) {%>
+                                        <% var totalprice = parseInt(orderList[i].price) * parseInt(orderList[i].order_count);
+                                            var status = orderList[i].status.toString().toLowerCase();
+                                            var id = orderList[i].id;
+                                        %>
+                                        <tr data-orderid="<%=orderList[i].id%>" id="admin-order-item-<%=orderList[i].id%>">
+                                            <td><%=orderList[i].product_id%></td>
+                                            <td><%=orderList[i].name%></td>
+                                            <td class="item-count"><span class="inner-item-count"><%=orderList[i].order_count%></span></td>
+                                            <td class="item-price"><%=orderList[i].price%></td>
+                                            <td class="item-order-on"><%=new Date(orderList[i].order_date)%></td>
+                                            <td class="item-order-by"><%=orderList[i].user_id%></td>
+                                            <td class="total-price"><%=totalprice%></td>
+                                            <td class="shipping-status"><%=orderList[i].status%></td>
+                                            <td class="ship-deliver-btn">
+                                                <%if(status == "shipping"){%>
+                                                    <button type="button" class="btn btn-primary btn-sm" id="ship-btn-<%=id%>">Ship it!</button>
+                                                <%}%>
+                                                <%if(status == "shipped"){%>
+                                                    <button type="button" class="btn btn-primary btn-sm" id="deliver-btn-<%=id%>">Delivered?</button>
+                                                <%}%>
+                                            </td>
+                                        </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                </div>
+            </div>
+        </section>
+        <div class="modal fade" id="admin-add-product" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Product</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-signin" id="login-form">
+                        <input type="text" class="form-control" placeholder="Product Name" id="product_name" name="product_name" required autofocus="true" />
+                        <div style="clear:both; margin: 5px;"></div>
+                        <input type="number" class="form-control" placeholder="Product Price" name="product_price" id="product_price" required/>
+                        <div style="clear:both; margin: 5px;"></div>
+                        <input type="text" class="form-control" placeholder="Product Description" name="product_description" id="product_description" required/>
+                        <div style="clear:both; margin: 5px;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="save-product-btn" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+    </body>
+</html>

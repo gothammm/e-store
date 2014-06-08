@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-Store - Item Orders</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="icon" href="/contents/images/favicon.ico"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">E-Store!</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+              </ul>
+              <div class="navbar-text navbar-right">Signed in as <a href="#" id="username-badge" class="navbar-link dropdown-toggle" data-toggle="dropdown">
+                   <%= username %><b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/orders">My Orders</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                      </ul>
+              </div>
+              <div class="pull-right" style="padding: 5px;">
+                <button class="btn btn-primary" onclick="window.location = '/logout';">Logout</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <section id="order-list"> 
+            <div class="jumbotron" style="background: white;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">My Orders</div>
+                    <div class="panel-body">
+                        <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Id</th>
+                                            <th>Product Name</th>
+                                            <th># of Items</th>
+                                            <th>Price</th>
+                                            <th>Order On</th>
+                                            <th>Total Price</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="my-order-summary-list">
+                                       <%for(var i = 0; i < orderList.length; i++) {%>
+                                            <% var totalprice = parseInt(orderList[i].price) * parseInt(orderList[i].order_count); %>
+                                            <tr data-productid="<%=orderList[i].id%>" id="order-item-<%=orderList[i].id%>">
+                                                <td><%=orderList[i].id%></td>
+                                                <td><%=orderList[i].name%></td>
+                                                <td class="item-count"><span class="inner-item-count"><%=orderList[i].order_count%></span></td>
+                                                <td class="item-price"><%=orderList[i].price%></td>
+                                                <td class="item-order-on"><%=new Date(orderList[i].order_date)%></td>
+                                                <td class="total-price"><%=totalprice%></td>
+                                                <td class="shipping-status"><%=orderList[i].status%></td>
+                                            </tr>
+                                       <%}%>
+                                    </tbody>
+                                </table>
+                    </div>
+                    </div>
+                </div> 
+            </div>  
+        </section>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+    </body>
+</html>

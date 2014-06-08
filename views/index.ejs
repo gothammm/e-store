@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-Store - Home</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="icon" href="/contents/images/favicon.ico"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">E-Store!</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+              </ul>
+              <div class="navbar-text navbar-right">Signed in as <a href="#" id="username-badge" class="navbar-link dropdown-toggle" data-toggle="dropdown">
+                   <%= username %><b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/orders">My Orders</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                      </ul>
+              </div>
+              <div class="pull-right" style="padding: 5px;">
+                <button id="mycart-btn" onclick="window.location = '/cart';" class="btn btn-success">My Cart <span id="cart-count" class="badge">0</span></button>
+                <button class="btn btn-primary" onclick="window.location = '/logout';">Logout</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <section id="search-store">
+            <div class="panel panel-primary" style="border:  none; box-shadow: none; margin: auto;">
+                <form class="panel-body" id="main-search-item">
+                    <input type="search" class="form-control pull-left" style="width:79%"/>
+                    <button class="btn btn-primary pull-right" style="width:19%">Search</button>
+                </form>
+            </div>
+        </section>
+        <div id="item-loading-spinner" style="text-align: center; margin: 5px;"><img alt="loader" style="width: 20px;" src="/images/spinner.gif" /> Loading Items..</div>
+        <section id="item-main-listing" style="display: none;">
+            <div class="jumbotron" style="background: white;">
+                   <div class="panel panel-primary" id="items-listing" style="margin: auto;">
+                        <div class="panel-heading">Item Listing.</div>
+                   </div>
+                   <div>
+                       <div style="text-align: center; margin: 10px; display: none;" id="no-more-listing" class="pull-left">No more results</div>
+                       <div class="pull-right" id="load-more-btn" style="margin: 5px; display: none;"><button class="btn btn-primary"><span id="loadmore-spinner"><img alt="spinner" style="width: 20px; display: none;" src="/images/spinner.gif"/></span> Load more..</button></div>
+                   </div>
+            </div>
+        </section>
+
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+    </body>
+</html>

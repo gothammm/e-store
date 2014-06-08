@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Store</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="icon" href="/contents/images/favicon.ico"/>
+    </head>
+    <body>
+         <div class="jumbotron" style="margin-left:auto;margin-right:auto; background: white;" onsubmit="">
+            <h1>Oops! Something went wrong!</h1>
+             <% if(error.status == 404) { %>
+                <h2>Page not found!</h2>
+             <%} else { %>
+                <p>Error Details</p>
+                <p><%= error.stack %></p>
+             <% } %>
+        </div>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+    </body>
+</html>
