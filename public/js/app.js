@@ -271,7 +271,7 @@
                     var tr = $(this).closest("tr");
                     var orderId = $(tr).data("orderid");
                     var status = "Delivered";
-                    $(me).text("Changing status!").attr("disabled", true); g
+                    $(me).text("Changing status!").attr("disabled", true);
                     $.ajax({
                         url: "/api/order/updatestatus",
                         method: "POST",
